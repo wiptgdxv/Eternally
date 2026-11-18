@@ -1,0 +1,21 @@
+/LoTranslation.exe
+/dist/
+
+# Local build and diagnostic outputs
+*.exe
+*.dll
+*.pdb
+*.lib
+*.res
+*.log
+*.test
+*.out
+
+# Local credentials and editor state
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,11 @@
+{
+  "name": "语境输入",
+  "version": "0.1",
+  "guid": "{51489E14-C88B-40FD-A536-9ECE387BD24F}",
+  "locale": "zh-Hans-CN",
+  "fallbackLocale": "zh-CN",
+  "icon": "",
+  "win8_icon": "",
+  "moduleName": "translation",
+  "serviceName": "ContextTranslation"
+}

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="Eternally 是 Windows 11 上的翻译输入法。选择原文和目标语言，在候选窗里预览译文，按回车直接上屏。" name="description"/>
+  <meta content="#101416" name="theme-color"/>
+  <title>
+   Eternally · 让表达跨过语言
+  </title>
+  <link href="./assets/eternally.png" rel="icon" type="image/png"/>
+  <link as="font" crossorigin="" href="./assets/dm-sans.ttf" rel="preload" type="font/ttf"/>
+  <link href="./styles.css" rel="stylesheet"/>
+  <script defer="" src="./demo.js">
+  </script>
+ </head>
+ <body>
+  <a class="skip" href="#main">
+   跳到主要内容
+  </a>
+  <header class="site-header" id="top">
+   <div class="wrap header-inner">
+    <a aria-label="Eternally 首页" class="brand" href="#top">
+     <img alt="" height="34" src="./assets/eternally.png" width="34"/>
+     <span translate="no">
+      Eternally
+     </span>
+    </a>
+    <nav aria-label="主导航">
+     <a href="#features">
+      优势
+     </a>
+     <a href="#showcase">
+      演示
+     </a>
+     <a href="#install">
+      下载与安装
+     </a>
+     <a href="#faq">
+      常见问题
+     </a>
+    </nav>
+    <div class="header-actions">
+     <a class="header-try" href="#pinyin">
+      试用一下
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+     <a aria-label="在 GitHub 查看 Eternally 源码（新标签页）" class="header-github" href="https://github.com/wiptgdxv/Eternally" rel="noopener noreferrer" target="_blank" title="在 GitHub 查看源码">
+      <svg aria-hidden="true" focusable="false" height="20" viewBox="0 0 24 24" width="20" fill="currentColor">
+       <path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57L9 21.07c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.08-.74.09-.73.09-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22l-.01 3.29c0 .31.2.69.82.57A12 12 0 0 0 12 .3Z"/>
+      </svg>
+      <span class="github-label" translate="no">GitHub</span>
+     </a>
+    </div>
+   </div>
+  </header>
+  <main id="main">
+   <section aria-labelledby="hero-title" class="hero wrap">
+    <div class="hero-copy">
+     <h1 id="hero-title">
+      用熟悉的语言，
+      <br/>
+      表达你的想法。
+     </h1>
+     <p class="hero-description">
+      英语转中文，中文转日语，方向由你选择。
+      <br class="desktop-break"/>
+      输入原文、预览译文，按回车直接上屏。
+     </p>
+     <div class="hero-actions">
+      <a class="button button-primary" href="#pinyin">
+       体验翻译输入
+       <span aria-hidden="true">
+        ↗
+       </span>
+      </a>
+      <a class="button button-secondary" href="#install">
+       获取 Windows 版
+      </a>
+     </div>
+     <p class="platform-note">
+      <span aria-hidden="true" class="windows-mark">
+      </span>
+      为 Windows 11 x64 设计
+     </p>
+    </div>
+    <div aria-label="Eternally 交互示例" class="hero-stage" data-demo="" id="demo">
+     <div class="message-window">
+      <div class="window-bar">
+       <span>
+        新消息
+       </span>
+       <div aria-hidden="true" class="window-controls">
+        <i>
+        </i>
+        <i>
+        </i>
+        <i>
+        </i>
+       </div>
+      </div>
+      <div class="message-recipient">
+       <span>
+        收件人
+       </span>
+       项目讨论
+      </div>
+      <div class="message-body">
+       <label class="visually-hidden" for="output">
+        译文上屏结果
+       </label>
+       <textarea id="output" name="translation-output" placeholder="译文会出现在这条消息里…" readonly="" rows="3"></textarea>
+      </div>
+      <div aria-hidden="true" class="message-toolbar">
+       <span>
+        A
+       </span>
+       <span>
+        +
+       </span>
+       <span class="message-send">
+        发送
+       </span>
+      </div>
+     </div>
+     <div class="ime">
+      <div class="ime-header">
+       <span class="ime-brand">
+        <img alt="" height="19" src="./assets/eternally.png" width="19"/>
+        Eternally
+       </span>
+       <span class="demo-sample-label">
+        本地例句
+       </span>
+      </div>
+      <div aria-label="选择翻译方向" class="translation-pair" role="group">
+       <label class="pair-field">
+        <span class="visually-hidden">
+         原文语言
+        </span>
+        <select aria-label="原文语言" autocomplete="off" id="source-language" name="source-language">
+         <option selected="" value="zh">
+          中文
+         </option>
+         <option value="en">
+          英语
+         </option>
+         <option value="ja">
+          日语
+         </option>
+         <option value="fr">
+          法语
+         </option>
+        </select>
+       </label>
+       <button aria-label="交换原文和目标语言" class="pair-swap" data-swap="" title="交换语言" type="button">
+        <span aria-hidden="true">
+         ⇄
+        </span>
+       </button>
+       <label class="pair-field">
+        <span class="visually-hidden">
+         目标语言
+        </span>
+        <select aria-label="目标语言" autocomplete="off" id="target-language" name="target-language">
+         <option value="zh">
+          中文
+         </option>
+         <option selected="" value="en">
+          英语
+         </option>
+         <option value="ja">
+          日语
+         </option>
+         <option value="fr">
+          法语
+         </option>
+        </select>
+       </label>
+      </div>
+      <div class="ime-composition">
+       <span class="draft" data-draft="">
+       </span>
+       <label class="visually-hidden" for="pinyin">
+        输入原文或拼音
+       </label>
+       <input aria-describedby="demo-status" aria-label="输入原文或拼音" autocapitalize="none" autocomplete="off" id="pinyin" maxlength="160" name="pinyin" placeholder="输入拼音，例如 nihao…" spellcheck="false" value="nihao"/>
+      </div>
+      <div aria-label="候选词" class="candidates" data-candidates="" role="group">
+      </div>
+      <div class="translation-line">
+       <span aria-live="polite" class="translation" data-preview="">
+        选词后显示译文
+       </span>
+       <span aria-hidden="true">
+        ↵
+       </span>
+      </div>
+     </div>
+     <div class="demo-bottom">
+      <p data-demo-status="" id="demo-status" role="status">
+       第一次回车选词，再按回车上屏。
+      </p>
+      <div class="demo-actions">
+       <button class="demo-reset" data-reset="" type="button">
+        重来
+       </button>
+       <button class="demo-enter" data-advance="" type="button">
+        回车
+        <span aria-hidden="true">
+         ↵
+        </span>
+       </button>
+      </div>
+     </div>
+     <div aria-label="选择体验例句" class="example-picker" role="group">
+      <span>
+       试试
+      </span>
+      <button data-example="nihao" type="button">
+       你好
+      </button>
+      <button data-example="xiexie" type="button">
+       谢谢
+      </button>
+      <button data-example="zaoshanghao" type="button">
+       早上好
+      </button>
+     </div>
+     <p class="demo-scope">
+      内置例句演示 · 中文选词后再回车，英语等原文按回车提交
+     </p>
+     <noscript>
+      <p>
+       开启 JavaScript 后，可以体验内置例句。
+      </p>
+     </noscript>
+    </div>
+   </section>
+   <div class="product-strip wrap">
+    <p>
+     从一个候选窗，
+     <br/>
+     到你正在使用的输入框。
+    </p>
+    <ul>
+     <li>
+      系统输入法
+     </li>
+     <li>
+      多种语言互译
+     </li>
+     <li>
+      支持离线中译英
+     </li>
+     <li>
+      词频在本机学习
+     </li>
+    </ul>
+   </div>
+   <section aria-labelledby="features-title" class="features wrap section" id="features">
+    <div class="section-heading">
+     <h2 id="features-title">
+      输入的节奏，
+      <br/>
+      还是你熟悉的。
+     </h2>
+     <p>
+      先选择原文和目标语言，再输入你的想法。
+      <br/>
+      中文支持拼音选词，英语等原文可以直接输入。
+     </p>
+    </div>
+    <div class="feature-columns">
+     <article>
+      <div aria-hidden="true" class="mini-composition">
+       <span>
+        你好
+       </span>
+       <span class="mini-caret">
+       </span>
+       <span class="mini-result">
+        Hello
+       </span>
+      </div>
+      <h3>
+       选词和翻译，一个窗口。
+      </h3>
+      <p>
+       中文先用拼音选词组成草稿，待选拼音为空后回车提交译文。输入英语等原文时，预览后按一次回车即可提交。
+      </p>
+     </article>
+     <article>
+      <div aria-hidden="true" class="mini-shortcut">
+       <kbd>
+        Ctrl
+       </kbd>
+       <span>
+        +
+       </span>
+       <kbd>
+        F8
+       </kbd>
+      </div>
+      <h3>
+       两种模式，随手切换。
+      </h3>
+      <p>
+       Ctrl + F8 切换普通输入和翻译。普通模式短按 Shift，在当前翻译方向的两种语言间切换；回到普通模式，继续使用上次所选语言。
+      </p>
+     </article>
+     <article>
+      <div aria-hidden="true" class="mini-frequency">
+       <span>
+        1  那好吧
+       </span>
+       <span>
+        nhb
+       </span>
+       <i>
+       </i>
+       <i>
+       </i>
+       <i>
+       </i>
+      </div>
+      <h3>
+       常用的词，慢慢排到前面。
+      </h3>
+      <p>
+       确认上屏后，本地词频会记住你的选择。支持全拼、简拼、模糊音，也能为常用短语设置缩写。
+      </p>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="showcase-title" class="showcase-section" id="showcase">
+    <div class="wrap showcase-layout">
+     <div class="showcase-copy">
+      <h2 id="showcase-title">
+       表达在这里发生。
+      </h2>
+      <p>
+       回邮件、和朋友聊天、给变量命名。
+       <br/>
+       同一个输入法，选择不同的翻译方向。
+      </p>
+      <div aria-label="切换使用场景" class="scenario-picker" role="group">
+       <button aria-pressed="true" data-scenario="mail" type="button">
+        <span>
+         英语转中文
+        </span>
+        <span aria-hidden="true">
+         ↗
+        </span>
+       </button>
+       <button aria-pressed="false" data-scenario="chat" type="button">
+        <span>
+         中文转日语
+        </span>
+        <span aria-hidden="true">
+         ↗
+        </span>
+       </button>
+       <button aria-pressed="false" data-scenario="code" type="button">
+        <span>
+         中文转英语
+        </span>
+        <span aria-hidden="true">
+         ↗
+        </span>
+       </button>
+      </div>
+      <p class="scenario-note">
+       点击切换场景示例
+      </p>
+     </div>
+     <div class="scenario-window" data-scenario="mail" data-scenario-preview="">
+      <div class="scenario-bar">
+       <span aria-hidden="true" class="scenario-indicator">
+       </span>
+       <span data-scenario-title="">
+        读懂对方的新安排
+       </span>
+       <span data-scenario-direction="">
+        英语 → 中文
+       </span>
+      </div>
+      <div class="scenario-content">
+       <span class="scenario-label">
+        原文
+       </span>
+       <p class="scenario-source" data-scenario-source="">
+        The meeting has been moved to 3 p.m.
+       </p>
+       <div class="scenario-divider">
+        <span aria-hidden="true">
+         ↓
+        </span>
+        <span>
+         回车上屏
+        </span>
+       </div>
+       <span class="scenario-label">
+        上屏译文
+       </span>
+       <p aria-live="polite" class="scenario-result" data-scenario-result="" lang="zh">
+        会议改到三点
+       </p>
+      </div>
+      <div class="scenario-footer">
+       <span>
+        场景示例
+       </span>
+       <a href="#pinyin">
+        亲手试一试
+        <span aria-hidden="true">
+         ↗
+        </span>
+       </a>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="languages-title" class="languages wrap section">
+    <div aria-hidden="true" class="language-art">
+     <span class="hello-en" lang="en">
+      Hello.
+     </span>
+     <span class="hello-ja" lang="ja">
+      こんにちは。
+     </span>
+     <span class="hello-fr" lang="fr">
+      Bonjour.
+     </span>
+     <span class="hello-ko" lang="ko">
+      안녕하세요.
+     </span>
+    </div>
+    <div class="language-copy">
+     <h2 id="languages-title">
+      表达有来有往，
+      <br/>
+      语言也能互换。
+     </h2>
+     <p>
+      在线可选择原文语言和目标语言，支持英语转中文、中文转日语等组合。常用目标语言可按 Ctrl + F9 依次切换。
+     </p>
+     <details class="all-languages">
+      <summary>
+       查看支持的语言
+       <span aria-hidden="true">
+        +
+       </span>
+      </summary>
+      <ul>
+       <li>
+        中文（简体）
+       </li>
+       <li>
+        英语
+       </li>
+       <li>
+        英式英语
+       </li>
+       <li>
+        日语
+       </li>
+       <li>
+        韩语
+       </li>
+       <li>
+        法语
+       </li>
+       <li>
+        德语
+       </li>
+       <li>
+        西班牙语
+       </li>
+       <li>
+        意大利语
+       </li>
+       <li>
+        葡萄牙语（巴西）
+       </li>
+       <li>
+        葡萄牙语（葡萄牙）
+       </li>
+       <li>
+        俄语
+       </li>
+       <li>
+        阿拉伯语
+       </li>
+       <li>
+        印地语
+       </li>
+       <li>
+        泰语
+       </li>
+       <li>
+        越南语
+       </li>
+       <li>
+        印尼语
+       </li>
+       <li>
+        荷兰语
+       </li>
+       <li>
+        波兰语
+       </li>
+       <li>
+        土耳其语
+       </li>
+       <li>
+        瑞典语
+       </li>
+       <li>
+        乌克兰语
+       </li>
+      </ul>
+     </details>
+     <div class="offline-note">
+      <span aria-hidden="true" class="offline-dot">
+      </span>
+      <div>
+       <h3>
+        断网，也能中译英。
+       </h3>
+       <p>
+        离线模型支持中文 → 英语，约 122 MB。
+        <br/>
+        其他语言组合使用在线翻译，会发送待译文本给微软 Edge 翻译服务。
+       </p>
+      </div>
+     </div>
+    </div>
+   </section>
+   <section aria-labelledby="settings-title" class="settings-section">
+    <div class="wrap settings-layout">
+     <div class="settings-copy">
+      <h2 id="settings-title">
+       调成你的习惯。
+      </h2>
+      <p>
+       语言、快捷键、字号与候选窗主题，
+       <br/>
+       都可以在设置里调整。
+      </p>
+      <ul>
+       <li>
+        普通模式记住上次所选语言
+       </li>
+       <li>
+        标点自动跟随输入语言
+       </li>
+       <li>
+        个人词库支持置顶、备份和恢复
+       </li>
+       <li>
+        自定义短语，让常用表达更快出现
+       </li>
+      </ul>
+     </div>
+     <figure class="settings-image">
+      <img alt="Eternally 的 Windows 深色设置窗口，左侧为输入、翻译、候选窗和词库导航" height="755" loading="lazy" src="./assets/windows-settings-dark.png" width="972"/>
+      <figcaption>
+       Windows 实机界面
+      </figcaption>
+     </figure>
+    </div>
+   </section>
+   <section aria-labelledby="install-title" class="install wrap section" id="install">
+    <div class="download-intro">
+     <img alt="" height="60" src="./assets/eternally.png" width="60"/>
+     <h2 id="install-title">
+      下次打字，
+      <br/>
+      从 Eternally 开始。
+     </h2>
+     <p>
+      支持 Windows 11 x64。首个公开安装包准备中。
+     </p>
+     <a class="release-status" href="https://github.com/wiptgdxv/Eternally/releases" rel="noopener noreferrer" target="_blank">
+      <span aria-hidden="true">
+      </span>
+      安装包准备中 · 查看发布页 ↗
+     </a>
+    </div>
+    <ol class="install-steps">
+     <li>
+      <h3>
+       下载并解压
+      </h3>
+      <p>
+       发布后从 <a class="inline-link" href="https://github.com/wiptgdxv/Eternally/releases" rel="noopener noreferrer" target="_blank">GitHub Releases</a> 获取 Windows 安装包，解压到一个文件夹。
+      </p>
+     </li>
+     <li>
+      <h3>
+       完成安装
+      </h3>
+      <p>
+       运行
+       <code>
+        Install-ContextIME.cmd
+       </code>
+       ，在 Windows 管理员窗口确认安装。
+      </p>
+     </li>
+     <li>
+      <h3>
+       开始输入
+      </h3>
+      <p>
+       按 Win + Space 选中 Eternally，在设置里选择翻译方向，然后输入原文。
+      </p>
+     </li>
+    </ol>
+   </section>
+   <section aria-labelledby="faq-title" class="faq wrap" id="faq">
+    <h2 id="faq-title">
+     还有这些问题。
+    </h2>
+    <div class="faq-list">
+     <details>
+      <summary>
+       怎么在普通输入和翻译之间切换？
+      </summary>
+      <p>
+       默认按 Ctrl + F8。普通模式直接输入，翻译模式预览后提交译文。中文、日语先组字选词；英语等直接输入原文，按回车提交译文。Shift 仅在普通模式下切换输入语言，不切换翻译模式。
+      </p>
+     </details>
+     <details>
+      <summary>
+       普通模式的 Shift 会切换哪些语言？
+      </summary>
+      <p>
+       使用当前翻译方向的原文语言和目标语言。例如「中文 → 日语」切换中文／日语，「英语 → 日语」切换英语／日语。原文选自动检测时，以英语和目标语言作为切换项。
+      </p>
+      <p>
+       中文支持拼音选词，日语支持罗马字转平假名、片假名；系统安装日语转换支持时，还可提供汉字候选。拉丁字母语言直接输入，其他复杂文字可粘贴到翻译草稿。
+      </p>
+     </details>
+     <details>
+      <summary>
+       标点会跟随输入语言吗？
+      </summary>
+      <p>
+       普通模式跟随当前输入语言，翻译模式跟随原文语言。英语使用英文符号，中文使用「，。」，日语使用「、。」和日语引号。网址、邮箱及原样输入的代码保留原符号。
+      </p>
+     </details>
+     <details>
+      <summary>
+       网页演示可以输入任意内容吗？
+      </summary>
+      <p>
+       网页使用本地内置例句，可选择中文、英语、日语和法语并交换方向。试试 nihao、Hello 或 Thank you，完整在线翻译在 Windows 应用中使用。
+      </p>
+     </details>
+     <details>
+      <summary>
+       输入内容会发送到哪里？
+      </summary>
+      <p>
+       在线翻译将待译草稿发送给微软 Edge 翻译服务。本地词频记录保存在电脑上。离线模型当前只支持中文译为英语，在线回退由设置中的开关控制。
+      </p>
+     </details>
+     <details>
+      <summary>
+       我在哪里调整输入法设置？
+      </summary>
+      <p>
+       右键通知区域的 Eternally 图标，打开「Eternally 设置」，即可修改语言、快捷键、候选窗样式及个人词库。
+      </p>
+     </details>
+    </div>
+   </section>
+  </main>
+  <footer class="site-footer">
+   <div class="wrap footer-inner">
+    <a class="brand" href="#top">
+     <img alt="" height="27" src="./assets/eternally.png" width="27"/>
+     <span translate="no">
+      Eternally
+     </span>
+    </a>
+    <span>
+     让表达跨过语言。
+    </span>
+    <div class="footer-links">
+     <a href="https://github.com/wiptgdxv/Eternally" rel="noopener noreferrer" target="_blank">
+      GitHub 源码 <span aria-hidden="true">↗</span>
+     </a>
+     <a href="https://chengjinxi.com/project/lo">
+      灵感来自 Lo
+      <span aria-hidden="true">
+       ↗
+      </span>
+     </a>
+    </div>
+   </div>
+  </footer>
+ </body>
+</html>

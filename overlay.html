@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>语境翻译</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: transparent; overflow: hidden; }
+  body { font: 14px/1.4 "Segoe UI", "Microsoft YaHei UI", sans-serif; }
+  #overlay { position: relative; width: max-content; min-width: 148px; max-width: 360px; padding: 14px; border-radius: 14px; background: #1e1e1e; color: #fff; }
+  #source, #translation { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+  #source { color: #999; max-height: 100px; overflow: auto; }
+  hr { height: 1px; border: 0; background: #3d3d3d; margin: 10px 0; }
+  #translation { font-weight: 500; min-height: 20px; max-height: 200px; overflow: auto; scrollbar-width: thin; scrollbar-color: #777 transparent; }
+  #translation[data-state="loading"] { color: #999; font-weight: 400; }
+  #translation[data-state="error"] { color: #f28c8c; font-weight: 400; }
+  #overlay[data-copyable] #translation { padding-right: 20px; }
+  button { position: absolute; right: 12px; bottom: 12px; width: 20px; height: 20px; padding: 2px; border: 0; border-radius: 3px; background: transparent; color: #999; cursor: pointer; opacity: 0; }
+  #overlay:hover button, button:focus-visible { opacity: 1; }
+  button:hover { color: #fff; }
+  button:focus-visible { outline: 1px solid #fff; }
+</style>
+<main id="overlay">
+  <p id="source" aria-label="原文"></p>
+  <hr>
+  <p id="translation" lang="en" aria-label="翻译"></p>
+  <button id="copy" type="button" title="复制译文" aria-label="复制译文" hidden>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" aria-hidden="true">
+      <rect x="5" y="4" width="8.5" height="10.5" rx="1.5"/>
+      <path d="M3.5 11.5h-.1A1.4 1.4 0 0 1 2 10.1V2.9a1.4 1.4 0 0 1 1.4-1.4h6.2A1.4 1.4 0 0 1 11 3"/>
+    </svg>
+  </button>
+</main>
+<script>
+  const overlay = document.querySelector('#overlay');
+  const source = document.querySelector('#source');
+  const translation = document.querySelector('#translation');
+  const copy = document.querySelector('#copy');
+  let revision = 0;
+  window.renderTranslation = (view) => {
+    revision = view.revision;
+    source.textContent = view.source;
+    translation.textContent = view.text;
+    translation.dataset.state = view.state;
+    translation.lang = view.state === 'ready' ? 'en' : 'zh-CN';
+    copy.hidden = view.state !== 'ready';
+    overlay.toggleAttribute('data-copyable', !copy.hidden);
+    copy.title = '复制译文';
+    translation.scrollTop = translation.scrollHeight;
+    return [Math.ceil(overlay.offsetWidth), Math.ceil(overlay.offsetHeight)];
+  };
+  copy.addEventListener('mousedown', (event) => event.preventDefault());
+  copy.addEventListener('click', async () => {
+    const current = revision;
+    try {
+      await window.mygo.call('Overlay.Copy', current);
+      if (revision === current) copy.title = '已复制';
+    } catch {
+      if (revision === current) copy.title = '复制失败，请重试';
+    }
+  });
+  document.addEventListener('contextmenu', (event) => event.preventDefault());
+</script>
+</html>

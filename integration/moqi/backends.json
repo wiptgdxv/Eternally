@@ -1,0 +1,8 @@
+[
+  {
+    "name": "contextime",
+    "command": "contextime\\ContextIME.exe",
+    "workingDir": "contextime",
+    "params": "--moqi"
+  }
+]
