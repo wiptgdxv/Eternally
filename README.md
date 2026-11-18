@@ -4,7 +4,9 @@ Windows 11 x64 翻译输入法。用熟悉的语言输入，在同一个候选�
 
 [使用说明](cmd/contextime/README.md) · [介绍页源码](docs/index.html) · [GitHub 项目](https://github.com/wiptgdxv/Eternally)
 
-![Eternally 深色设置窗口](docs/assets/windows-settings-dark.png)
+![Eternally 在 Windows 编辑器中预览中文到英文的译文](docs/assets/ime-use-translation.png)
+
+[拼音候选](docs/assets/ime-use-candidates.png) · [回车上屏](docs/assets/ime-use-committed.png) · [深色设置](docs/assets/windows-settings-dark.png)
 
 ## 可以做什么
 
